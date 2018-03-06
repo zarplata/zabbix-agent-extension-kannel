@@ -27,7 +27,7 @@ Options:
   -z --zabbix <zabbix>        Hostname or IP address of zabbix server
                                 [default: 127.0.0.1].
   -p --port <port>            Port of zabbix server [default: 10051].
-  --prefix <prefix>    Add part of your prefix for key [default: None].
+  --prefix <prefix>           Add part of your prefix for key [default: None].
 
 Commands:
   --discovery                 Run low-level discovery.
