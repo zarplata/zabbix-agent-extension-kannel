@@ -88,7 +88,10 @@ func getKannelStats(kannel string) (Stats, error) {
 		return stats, hierr.Errorf(err, "can't read response body")
 	}
 
-	xml.Unmarshal(body, &result)
+	err = xml.Unmarshal(body, &result)
+	if err != nil {
+		return stats, hierr.Errorf(err, "can't unmarshal body")
+	}
 
 	//cut all after comma "running, uptime 33d 2h 5m 18s"
 	result.Status = strings.Split(result.Status, ", ")[0]
