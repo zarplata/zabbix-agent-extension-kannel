@@ -11,23 +11,26 @@ import (
 	hierr "github.com/reconquest/hierr-go"
 )
 
+// Stats kannel
 type Stats struct {
 	Status    string      `xml:"status"`
-	WPD       WPDStatus   `xml:"wpd"`
-	SMS       SMSstats    `xml:"sms"`
-	DLR       DLRStatus   `xml:"dlr"`
+	WPD       WPDStats    `xml:"wpd"`
+	SMS       SMSStats    `xml:"sms"`
+	DLR       DLRStats    `xml:"dlr"`
 	SMSCCount int         `xml:"smscs>count"`
 	SMSC      []SMSCStats `xml:"smscs>smsc"`
 }
 
-type WPDStatus struct {
+// WPDStats struct
+type WPDStats struct {
 	Recv       int `xml:"received>total"`
 	RecvQueued int `xml:"received>queued"`
 	Sent       int `xml:"sent>total"`
 	SentQueued int `xml:"sent>queued"`
 }
 
-type SMSstats struct {
+// SMSStats struct
+type SMSStats struct {
 	Recv       int    `xml:"received>total"`
 	RecvQueued int    `xml:"received>queued"`
 	Sent       int    `xml:"sent>total"`
@@ -37,11 +40,13 @@ type SMSstats struct {
 	Outbound   string `xml:"outbound"`
 }
 
-type DLRStatus struct {
+// DLRStats struct
+type DLRStats struct {
 	Queued  int    `xml:"queued"`
 	Storage string `xml:"storage"`
 }
 
+// SMSCStats struct
 type SMSCStats struct {
 	Name   string `xml:"name"`
 	ID     string `xml:"id"`
