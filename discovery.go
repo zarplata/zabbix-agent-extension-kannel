@@ -6,7 +6,7 @@ import (
 )
 
 func discovery(
-	stats Stats,
+	stats *Stats,
 ) error {
 	discoveryData := make(map[string][]map[string]string)
 	var discoveredItems []map[string]string

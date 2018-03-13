@@ -15,7 +15,7 @@ func makePrefix(prefix, key string) string {
 
 func createMetrics(
 	hostname string,
-	stats Stats,
+	stats *Stats,
 	metrics []*zsend.Metric,
 	prefix string,
 ) []*zsend.Metric {

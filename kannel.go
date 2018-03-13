@@ -58,7 +58,7 @@ type SMSCStats struct {
 	Queued int `xml:"queued"`
 }
 
-func getKannelStats(kannel string) (Stats, error) {
+func getKannelStats(kannel string) (*Stats, error) {
 
 	var (
 		stats    Stats
@@ -71,7 +71,7 @@ func getKannelStats(kannel string) (Stats, error) {
 
 	ret, err := client.Get(kannel)
 	if err != nil {
-		return stats, hierr.Errorf(
+		return &result, hierr.Errorf(
 			err,
 			"can`t get kannel stats %s",
 			kannel,
@@ -81,7 +81,7 @@ func getKannelStats(kannel string) (Stats, error) {
 	defer ret.Body.Close()
 
 	if ret.StatusCode != http.StatusOK {
-		return stats, fmt.Errorf(
+		return &result, fmt.Errorf(
 			"can`t get status, return %d HTTP code, expected %d HTTP code",
 			ret.StatusCode,
 			http.StatusOK,
@@ -90,12 +90,12 @@ func getKannelStats(kannel string) (Stats, error) {
 
 	body, err := ioutil.ReadAll(ret.Body)
 	if err != nil {
-		return stats, hierr.Errorf(err, "can't read response body")
+		return &result, hierr.Errorf(err, "can't read response body")
 	}
 
 	err = xml.Unmarshal(body, &result)
 	if err != nil {
-		return stats, hierr.Errorf(err, "can't unmarshal body")
+		return &result, hierr.Errorf(err, "can't unmarshal body")
 	}
 
 	//cut all after comma "running, uptime 33d 2h 5m 18s"
@@ -112,5 +112,5 @@ func getKannelStats(kannel string) (Stats, error) {
 	}
 	result.SMSC = stats.SMSC
 
-	return result, nil
+	return &result, nil
 }
