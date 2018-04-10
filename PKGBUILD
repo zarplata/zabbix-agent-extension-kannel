@@ -7,7 +7,7 @@ license=('GPL')
 makedepends=('go')
 depends=()
 install='install.sh'
-source=("git+http://a.kitsul@git.rn/scm/~a.kitsul/zabbix-agent-extension-kannel.git#branch=dev")
+source=("git+http://github.com/zarplata/zabbix-agent-extension-kannel.git#branch=master")
 md5sums=('SKIP')
 
 pkgver() {
